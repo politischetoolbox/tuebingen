@@ -824,6 +824,55 @@
     border-left-color: var(--orange);
   }
 
+
+  /* TOOLTIP */
+  .has-tip {
+    position: relative;
+    cursor: pointer;
+  }
+  .has-tip::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    line-height: 1.6;
+    padding: 10px 14px;
+    width: 240px;
+    border: 2px solid var(--teal);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    transform: translateX(-50%) translateY(4px);
+    z-index: 100;
+    white-space: normal;
+    font-weight: 400;
+  }
+  .has-tip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .has-tip::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--teal);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    z-index: 101;
+  }
+  .has-tip:hover::before {
+    opacity: 1;
+  }
+
   /* PRINT */
   @media print {
     .hero { page-break-after: always; }
@@ -840,7 +889,7 @@
   <h1 class="hero-title">
     Politische<span>Toolbox</span>
   </h1>
-  <p class="hero-sub">WIE · WER · WO — In Tübingen politisch aktiv werden. Ob Schüler:in, Student:in oder längst im Berufsleben. Kein einzig richtiger Weg. Viele mögliche Sprossen.</p>
+  <p class="hero-sub">WIE · WER · WO — In Tübingen politisch aktiv werden. Ob Schüler:in, Azubi, Student:in oder schon im Berufsleben. Kein einzig richtiger Weg. Viele mögliche Sprossen.</p>
   <div class="hero-badge">Nimm dir, was du brauchst ✊</div>
 </header>
 
@@ -985,7 +1034,6 @@
 
       <!-- SCHULE -->
       <div class="beispiel-card beispiel-schule">
-        <div class="beispiel-tag">Für Schüler:innen</div>
         <h3>🏫 Schule als politischer Raum</h3>
         <p class="beispiel-intro">Die Schule hat eigene Machtstrukturen — und echte Hebel. Was hier verändert wird, betrifft alle täglich.</p>
         <div class="beispiel-cols">
@@ -1016,9 +1064,8 @@
 
       <!-- KULTURRAUM -->
       <div class="beispiel-card beispiel-kultur">
-        <div class="beispiel-tag">Für junge Erwachsene & Erwachsene</div>
         <h3>🎸 Kulturraum unter Druck</h3>
-        <p class="beispiel-intro">Ein Proberaum wird gekündigt. Ein alternatives Kulturzentrum verliert seine Räume. Ein günstiger Veranstaltungsort schließt, weil die Miete steigt. Wer Kultur macht, aber kein Geld hat, wird verdrängt — das ist Klassismus, strukturell.</p>
+        <p class="beispiel-intro">Ein Proberaum wird gekündigt. Ein alternatives Kulturzentrum verliert seine Räume. Ein günstiger Veranstaltungsort schließt, weil die Miete steigt. Wer Kultur macht, aber kein Geld hat, wird verdrängt.</p>
         <div class="beispiel-cols">
           <div>
             <div class="beispiel-col-label">Wer entscheidet?</div>
@@ -1071,19 +1118,22 @@
   <!-- BÜNDNISSE -->
   <section class="buendnis-section reveal">
     <h2>Bildet Banden! 🤝</h2>
-    <p class="sub">NGOs, Vereine, Verbände — Lokale Initiativen in Tübingen (Beispiele):</p>
+    <p class="sub">NGOs, Vereine, Verbände, Gewerkschaften — Mögliche Bündnispartner:innen in Tübingen:</p>
     <div class="buendnis-list">
-      <div class="buendnis-pill">Fridays for Future Tübingen</div>
-      <div class="buendnis-pill">Grüne Jugend</div>
-      <div class="buendnis-pill">solid</div>
-      <div class="buendnis-pill">Jugendinitiativen</div>
-      <div class="buendnis-pill">Kulturvereine</div>
-      <div class="buendnis-pill">Antidiskriminierungsstellen</div>
-      <div class="buendnis-pill">Nachhaltigkeitsgruppen</div>
-      <div class="buendnis-pill">Nachbarschaftsinitiativen</div>
-      <div class="buendnis-pill">Jugendhäuser</div>
+      <div class="buendnis-pill has-tip" data-tip="z.B. Fridays for Future Tübingen, BUND, Greenpeace Gruppe Tübingen, Nabu">Nachhaltigkeitsgruppen</div>
+      <div class="buendnis-pill has-tip" data-tip="z.B. Kulturzentrum EPPLEHAUS, Stadtbibliothek-Initiativen, lokale Musikszene, freie Theater">Kulturvereine</div>
+      <div class="buendnis-pill has-tip" data-tip="z.B. Partei-Jugendgruppen (solid, Grüne Jugend, Jusos), Jugendhäuser, Jugendgemeinderat">Jugendinitiativen</div>
+      <div class="buendnis-pill has-tip" data-tip="ver.di, IG Metall, GEW — auch für Azubis & Berufseinsteiger:innen. Oft mit Beratungs- und Organisationsressourcen.">Gewerkschaften</div>
+      <div class="buendnis-pill has-tip" data-tip="Mieterverein Tübingen — bei Verdrängung, Mietsteigerungen, Eigenbedarfskündigungen. Starker lokaler Hebel.">Mieterinitiativen</div>
+      <div class="buendnis-pill has-tip" data-tip="z.B. Stadtteiltreffs, Bürger:innenvereine in Weststadt, Südstadt, Derendingen — lokale Netzwerke mit Verwaltungszugang.">Stadtteilinitiativen</div>
+      <div class="buendnis-pill has-tip" data-tip="AWO Tübingen, DPWV — bieten oft Räume, Netzwerke und institutionelle Unterstützung für soziale Projekte.">Wohlfahrtsverbände</div>
+      <div class="buendnis-pill has-tip" data-tip="Elterninitiativen, Kita-Beiräte — oft unterschätzte Kraft bei Themen wie Bildung, Betreuung, Stadtplanung.">Elterninitiativen</div>
+      <div class="buendnis-pill has-tip" data-tip="z.B. Behindertenbeauftragte der Stadt, Inklusionsinitiativen — wichtige Perspektive bei Barrierefreiheit, Teilhabe, Raumgestaltung.">Behindertenverbände</div>
+      <div class="buendnis-pill has-tip" data-tip="Gruppen, die aus persönlicher Betroffenheit heraus politisch werden — z.B. zu psychischer Gesundheit, Sucht, Armut.">Selbsthilfegruppen</div>
+      <div class="buendnis-pill has-tip" data-tip="Betriebsräte und Azubi-Vertretungen in Tübinger Betrieben — politische Mitbestimmung beginnt auch am Arbeitsplatz.">Betriebsräte & Azubi-Vertretungen</div>
+      <div class="buendnis-pill has-tip" data-tip="Antidiskriminierungsberatung Tübingen, queere Gruppen, migrantische Selbstorganisationen.">Antidiskriminierungsstellen</div>
     </div>
-    <div class="buendnis-why">Politische Wirksamkeit steigt kollektiv. Bündnisse erhöhen Reichweite, Expertise und Druck. Außerdem macht es gemeinsam mehr Spaß! — Lohnt sich mal reinzuschauen: <strong style="color:var(--teal)">mitwirk-o-mat.de</strong></div>
+    <div class="buendnis-why">Politische Wirksamkeit steigt kollektiv. Bündnisse erhöhen Reichweite, Expertise und Druck. Außerdem macht es gemeinsam mehr Spaß! — Lohnt sich mal reinzuschauen: <a href="https://mitwirk-o-mat.de" target="_blank" style="color:var(--teal);font-weight:700;text-decoration:underline;">mitwirk-o-mat.de</a></div>
   </section>
 
   <!-- LANDESEBENE -->
@@ -1142,7 +1192,6 @@
         </tr>
       </tbody>
     </table>
-    <p style="font-size:12px;color:#888;margin-top:12px;font-style:italic;">Fallen dir noch mehr ein? Füge sie hinzu!</p>
   </section>
 
   <!-- AKTIONSKARTE -->
@@ -1152,35 +1201,43 @@
     <div class="aktions-form">
       <div class="form-item">
         <label>Unser Thema</label>
-        <input type="text" class="form-line" placeholder="z.B. mehr Grünflächen in der Weststadt">
+        <input type="text" class="form-line" placeholder="z.B. Proberaum-Kündigung · Awareness in der Ausbildung · Barrierefreiheit im Viertel">
       </div>
       <div class="form-item">
         <label>Welche Struktur steckt dahinter?</label>
-        <input type="text" class="form-line" placeholder="z.B. Stadtplanung, Haushaltsplan">
+        <input type="text" class="form-line" placeholder="z.B. Stadtplanung · Haushaltsplan · Vergabepraxis · Mietmarkt">
       </div>
       <div class="form-item">
         <label>Wer entscheidet?</label>
-        <input type="text" class="form-line" placeholder="z.B. Gemeinderat, Baurechtsamt">
+        <input type="text" class="form-line" placeholder="z.B. Gemeinderat · Kulturamt · Schulleitung · Vermieter:in · Betriebsrat">
       </div>
       <div class="form-item">
         <label>Auf welcher Ebene?</label>
-        <input type="text" class="form-line" placeholder="z.B. Kommune, Land, Schule">
+        <input type="text" class="form-line" placeholder="z.B. Betrieb · Schule · Kommune · Land BW">
       </div>
       <div class="form-item">
         <label>Unser erster realistischer Schritt</label>
-        <input type="text" class="form-line" placeholder="z.B. JGR anschreiben">
+        <input type="text" class="form-line" placeholder="z.B. Kulturamt anfragen · Betriebsrat einschalten · JGR anschreiben · Mieterverein kontaktieren">
       </div>
       <div class="form-item">
         <label>Welche Öffentlichkeit brauchen wir?</label>
-        <input type="text" class="form-line" placeholder="z.B. Social Media, Lokal-Presse">
+        <input type="text" class="form-line" placeholder="z.B. Social Media · Schwäbisches Tagblatt · Aktion im öffentlichen Raum">
       </div>
       <div class="form-item">
         <label>Wen müssen wir ansprechen?</label>
-        <input type="text" class="form-line" placeholder="z.B. Fraktion X, Verwaltungsamt Y">
+        <input type="text" class="form-line" placeholder="z.B. Fraktion X · Fachbereich Liegenschaften · Ausbildungsleitung · Ordnungsamt">
       </div>
       <div class="form-item">
         <label>Welche Bündnisse können wir eingehen?</label>
-        <input type="text" class="form-line" placeholder="z.B. FFF Tübingen, Jugendhaus">
+        <input type="text" class="form-line" placeholder="z.B. Gewerkschaft · Mieterverein · Kulturverein · Stadtteilinitiative · Jugendhaus">
+      </div>
+      <div class="form-item">
+        <label>Welche Ressourcen brauchen wir?</label>
+        <input type="text" class="form-line" placeholder="z.B. Raum für Treffen · Förderantrag · Druckmaterial · Rechtshilfe">
+      </div>
+      <div class="form-item">
+        <label>Wie verteilen wir Aufgaben?</label>
+        <input type="text" class="form-line" placeholder="z.B. wer schreibt die Anfrage · wer koordiniert · wer kommuniziert nach außen">
       </div>
     </div>
   </section>
