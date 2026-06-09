@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Politische Toolbox Tübingen – Option A</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #1e1e26;
+  --bg-card:  #26262f;
+  --bg-hover: #2e2e3a;
+  --white:    #f4f0ea;
+  --muted:    #8a8799;
+  --violet:   #c87aff;
+  --pink:     #ff5fa8;
+  --yellow:   #ffe44d;
+  --teal:     #3dddbc;
+  --red:      #ff4d5e;
+  --orange:   #ff8c42;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
+}
+
+/* grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 64px 52px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 4px solid var(--violet);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; right: -20%;
+  width: 65%; height: 90%;
+  background: radial-gradient(ellipse, rgba(200,122,255,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: -5%;
+  width: 40%; height: 50%;
+  background: radial-gradient(ellipse, rgba(255,95,168,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-wm {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(110px, 21vw, 270px);
+  color: rgba(200,122,255,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-content { position: relative; z-index: 2; }
+
+.hero-eyebrow {
+  font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 22px;
+  opacity: 0; animation: up 0.7s 0.1s ease forwards;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(66px, 13vw, 148px);
+  line-height: 0.88; letter-spacing: 1px;
+  opacity: 0; animation: up 0.7s 0.2s ease forwards;
+}
+.hero-title .l1 { color: var(--violet); display: block; }
+.hero-title .l2 { color: var(--yellow); display: block; font-size: clamp(16px, 3vw, 32px); letter-spacing: 6px; margin-top: 12px; font-family: 'Space Mono', monospace; }
+
+.hero-tag {
+  margin-top: 30px; max-width: 540px;
+  opacity: 0; animation: up 0.7s 0.35s ease forwards;
+}
+.hero-tag p { font-size: 14px; line-height: 1.9; color: var(--muted); }
+.hero-tag p strong { color: var(--white); }
+.hero-tag .sub {
+  display: block; margin-top: 12px;
+  font-size: 11px; color: var(--pink); font-style: italic;
+}
+
+.hero-cta {
+  display: inline-block; margin-top: 34px;
+  padding: 13px 28px;
+  border: 2px solid var(--violet); color: var(--violet);
+  font-family: 'Bebas Neue', sans-serif; font-size: 19px; letter-spacing: 3px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+  opacity: 0; animation: up 0.7s 0.5s ease forwards;
+}
+.hero-cta:hover { background: var(--violet); color: var(--bg); transform: translate(-3px,-3px); }
+
+.scroll-hint {
+  position: absolute; bottom: 34px; right: 52px;
+  font-size: 9px; letter-spacing: 4px; color: #3a3a4a;
+  text-transform: uppercase; writing-mode: vertical-rl;
+  opacity: 0; animation: fade 1s 1s ease forwards;
+}
+
+/* ── GRID ── */
+.grid-section { padding: 76px 52px; }
+
+.section-header {
+  display: flex; align-items: baseline; gap: 18px;
+  margin-bottom: 38px; padding-bottom: 12px;
+  border-bottom: 1px solid rgba(200,122,255,0.2);
+}
+.section-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--violet); }
+.section-note  { font-size: 11px; color: #3e3e52; font-style: italic; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+  gap: 3px;
+}
+
+.card {
+  background: var(--bg-card);
+  padding: 32px 28px;
+  text-decoration: none; color: var(--white);
+  display: flex; flex-direction: column; gap: 11px;
+  position: relative; overflow: hidden;
+  transition: background 0.2s, transform 0.2s;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+.card::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.card:hover { background: var(--bg-hover); transform: translate(-4px,-4px); }
+.card:hover::after { transform: scaleX(1); }
+
+.card:nth-child(1)::after { background: var(--yellow); }
+.card:nth-child(2)::after { background: var(--red); }
+.card:nth-child(3)::after { background: var(--teal); }
+.card:nth-child(4)::after { background: var(--violet); }
+.card:nth-child(5)::after { background: var(--pink); }
+.card:nth-child(6)::after { background: var(--orange); }
+.card:nth-child(7)::after { background: var(--yellow); }
+.card:nth-child(8)::after { background: var(--teal); }
+
+.card-num { font-family: 'Bebas Neue', sans-serif; font-size: 12px; letter-spacing: 3px; }
+.card:nth-child(1) .card-num { color: var(--yellow); }
+.card:nth-child(2) .card-num { color: var(--red); }
+.card:nth-child(3) .card-num { color: var(--teal); }
+.card:nth-child(4) .card-num { color: var(--violet); }
+.card:nth-child(5) .card-num { color: var(--pink); }
+.card:nth-child(6) .card-num { color: var(--orange); }
+.card:nth-child(7) .card-num { color: var(--yellow); }
+.card:nth-child(8) .card-num { color: var(--teal); }
+
+.card-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; line-height: 1; letter-spacing: 0.5px; }
+.card-desc  { font-size: 11px; line-height: 1.85; color: var(--muted); flex: 1; }
+.card-arrow { align-self: flex-end; font-size: 18px; color: #333340; transition: color 0.2s, transform 0.2s; }
+.card:hover .card-arrow { color: var(--white); transform: translate(4px,-4px); }
+
+/* ── STRIP ── */
+.strip {
+  background: var(--bg-hover);
+  border-top: 2px solid rgba(200,122,255,0.25);
+  border-bottom: 2px solid rgba(200,122,255,0.25);
+  padding: 48px 52px;
+  position: relative; overflow: hidden;
+}
+.strip::before {
+  content: 'HANDELN';
+  position: absolute; right: -10px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 150px;
+  color: rgba(200,122,255,0.04);
+  pointer-events: none; user-select: none; line-height: 1; white-space: nowrap;
+}
+.strip-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(20px, 3vw, 36px);
+  line-height: 1.3;
+  max-width: 640px;
+  position: relative; z-index: 1;
+  color: var(--muted);
+}
+.strip-text em   { font-style: normal; color: var(--violet); }
+.strip-text span { color: var(--yellow); }
+.strip-text small { font-size: 0.45em; color: var(--muted); font-family: 'Space Mono', monospace; letter-spacing: 1px; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 34px 52px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; color: #3e3e52; }
+.footer-note  { font-size: 10px; letter-spacing: 2px; color: #3e3e52; text-transform: uppercase; }
+
+/* ── ANIM ── */
+@keyframes up   { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fade { from { opacity:0; } to { opacity:1; } }
+
+.reveal { opacity:0; transform:translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media (max-width:640px) {
+  .hero, .grid-section, .strip, footer { padding-left:24px; padding-right:24px; }
+  .scroll-hint { display:none; }
+}
+@media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none!important; transition:none!important; } }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-wm">ZUHAUSE</div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Werkzeuge für alle</div>
+    <h1 class="hero-title">
+      <span class="l1">Archiv</span>
+      <span class="l2">— starting here</span>
+    </h1>
+    <div class="hero-tag">
+      <p>Politik passiert täglich — ob du mitmachst oder nicht.<br>
+      <strong>Hier lernst du, wie du etwas bewirken kannst und ins Handeln kommst.</strong></p>
+      <span class="sub">Kein Vorwissen nötig. Keine Parteimitgliedschaft. Nur eine Meinung.</span>
+    </div>
+    <a href="#werkzeuge" class="hero-cta">Zu den Werkzeugen ↓</a>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</section>
+
+<section class="grid-section" id="werkzeuge">
+  <div class="section-header reveal">
+    <span class="section-label">— 8 Werkzeuge</span>
+    <span class="section-note">Klick, was dich interessiert.</span>
+  </div>
+  <div class="cards reveal">
+    <a class="card" href="https://politischetoolbox.github.io/tuebingen/toolbox/">
+      <div class="card-num">01</div>
+      <div class="card-title">Politische Toolbox Tübingen</div>
+      <div class="card-desc">Wer entscheidet was in Tübingen — und wie kommst du da ran? Gremien, Hebel, erste Schritte.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="revolution/">
+      <div class="card-num">02</div>
+      <div class="card-title">How to Start a Revolution</div>
+      <div class="card-desc">Wandel passiert nicht zufällig. Theorie und Praxis des Widerstands — von Gene Sharp bis Gramsci.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="rechtliches/">
+      <div class="card-num">03</div>
+      <div class="card-title">Rechtliches & Aktionskunst</div>
+      <div class="card-desc">Was darfst du — und wo wird's grau? Versammlungsrecht, Kunstfreiheit, Informationsfreiheit.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="digital/">
+      <div class="card-num">04</div>
+      <div class="card-title">Digitale Sicherheit</div>
+      <div class="card-desc">Wer sieht mit? Sichere Kommunikation, Schutz vor Doxing und digitaler Überwachung.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="buendnisse/">
+      <div class="card-num">05</div>
+      <div class="card-title">Bündnisse & Vernetzung</div>
+      <div class="card-desc">Alleine nervt man sich. Gemeinsam verändert man etwas. Wie man Mitstreiter:innen findet.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="foerderung/">
+      <div class="card-num">06</div>
+      <div class="card-title">Finanzierung & Förderung</div>
+      <div class="card-desc">Gute Ideen brauchen manchmal Geld. Fördertöpfe, Stiftungen, Bewegungsfonds in und um Tübingen.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="inspiration/">
+      <div class="card-num">07</div>
+      <div class="card-title">Inspiration & Leseliste</div>
+      <div class="card-desc">Bücher, Filme, Texte, Podcasts. Bell hooks, Naomi Klein, Assata Shakur, Le Guin — und mehr.</div>
+      <div class="card-arrow">→</div>
+    </a>
+    <a class="card" href="journal/">
+      <div class="card-num">08</div>
+      <div class="card-title">Journal & Prompts</div>
+      <div class="card-desc">Was treibt dich an? Was hält dich auf? Schreibprompts für politische Selbstreflexion.</div>
+      <div class="card-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<section class="strip reveal">
+  <div class="strip-text">
+    Du musst keine <em>Politikerin</em> sein,<br>
+    um <span>etwas zu verändern.</span><br>
+    <small>(kannst du aber natürlich)</small>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Politische Toolbox Tübingen</div>
+  <div class="footer-note">Kein Anspruch auf Vollständigkeit · Alle Sprossen sind gültig</div>
+</footer>
+
+<script>
+  document.querySelector('.hero-cta').addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('#werkzeuge').scrollIntoView({ behavior: 'smooth' });
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
